@@ -1,9 +1,34 @@
 // query selector variables go here 👇
 var poster = document.querySelector(".poster-img");
-var title = document.querySelector(".poster-title");
 var quote = document.querySelector(".poster-quote");
 var randomButton = document.querySelector(".show-random");
+var title = document.querySelector(".poster-title");
+
 // we've provided you with some data to work with 👇
+var savedPosters = [];
+var currentPoster;
+
+
+// event listeners go here 👇
+document.addEventListener("DOMContentLoaded", randomPoster);
+
+randomButton.addEventListener("click", randomPoster);
+
+// functions and event handlers go here 👇
+function randomPoster() {
+  currentPoster = new Poster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)])
+  poster.src = currentPoster.imageURL;
+  title.innerText = currentPoster.title;
+  quote.innerText = currentPoster.quote;
+};
+
+// (we've provided one for you to get you started)!
+function getRandomIndex(array) {
+  return Math.floor(Math.random() * array.length);
+}
+
+// Array variables //
+
 var images = [
   "./assets/bees.jpg",
   "./assets/bridge.jpg",
@@ -101,20 +126,3 @@ var quotes = [
   "Each person must live their life as a model for others.",
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
-var savedPosters = [];
-var currentPoster = new Poster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)])
-
-function randomPoster() {
-  currentPoster = new Poster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)])
-  poster.src = currentPoster.imageURL;
-  title.innerText = currentPoster.title;
-  quote.innerText = currentPoster.quote;
-};
-// event listeners go here 👇
-document.addEventListener("DOMContentLoaded", randomPoster);
-randomButton.document.addEventListener("click", randomPoster);
-// functions and event handlers go here 👇
-// (we've provided one for you to get you started)!
-function getRandomIndex(array) {
-  return Math.floor(Math.random() * array.length);
-}
