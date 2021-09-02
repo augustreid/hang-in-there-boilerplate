@@ -4,7 +4,8 @@ var quote = document.querySelector(".poster-quote");
 var randomButton = document.querySelector(".show-random");
 var title = document.querySelector(".poster-title");
 var createPosterButton = document.querySelector(".show-form");
-var createPosterForm = document.querySelector("form");
+var createPosterForm = document.querySelector(".poster-form");
+var pageLoadPoster = document.querySelector(".main-poster");
 
 // we've provided you with some data to work with 👇
 var savedPosters = [];
@@ -27,7 +28,9 @@ function randomPoster() {
 };
 
 function showPosterForm() {
-
+  hide(pageLoadPoster);
+  // show(createPosterForm);
+  createPosterForm.classList.remove('hidden');
 }
 
 function show(element) {
