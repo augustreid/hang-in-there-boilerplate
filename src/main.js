@@ -6,6 +6,7 @@ var title = document.querySelector(".poster-title");
 var createPosterButton = document.querySelector(".show-form");
 var createPosterForm = document.querySelector(".poster-form");
 var pageLoadPoster = document.querySelector(".main-poster");
+var showMainButton = document.querySelector(".show-main");
 
 // we've provided you with some data to work with 👇
 var savedPosters = [];
@@ -19,6 +20,8 @@ randomButton.addEventListener("click", randomPoster);
 
 createPosterButton.addEventListener("click", showPosterForm);
 
+showMainButton.addEventListener("click", showMainPage)
+
 // functions and event handlers go here 👇
 function randomPoster() {
   currentPoster = new Poster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)])
@@ -29,12 +32,16 @@ function randomPoster() {
 
 function showPosterForm() {
   hide(pageLoadPoster);
-  // show(createPosterForm);
-  createPosterForm.classList.remove('hidden');
+  show(createPosterForm);
+}
+
+function showMainPage() {
+  hide(createPosterForm);
+  show(pageLoadPoster);
 }
 
 function show(element) {
-  element.classlist.remove('hidden');
+  element.classList.remove('hidden');
 }
 
 function hide(element) {
@@ -46,13 +53,6 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 // Pseudocoding //
-//When a user clicks the “Make Your Own Poster” button, we should see the form, and the main poster should be hidden
-  // Assign a variable and querySelector to the "Make Your Own Poster" button.
-  // Assign a variable and querySelector to the MYOP form elements.
-  // Add eventListener to MYOP button.
-  // Create function for eventListener.
-  // Hide random Posters.
-  // show MYOP form.
 
 // When a user clicks the “View Saved Posters” button, we should see the saved posters area, and the main poster should be hidden
   // Assign a variable and querySelector to the "View Saved Posters" button.
