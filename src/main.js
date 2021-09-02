@@ -3,6 +3,10 @@ var poster = document.querySelector(".poster-img");
 var quote = document.querySelector(".poster-quote");
 var randomButton = document.querySelector(".show-random");
 var title = document.querySelector(".poster-title");
+var createPosterButton = document.querySelector(".show-form");
+var createPosterForm = document.querySelector(".poster-form");
+var pageLoadPoster = document.querySelector(".main-poster");
+var showMainButton = document.querySelector(".show-main");
 
 // we've provided you with some data to work with 👇
 var savedPosters = [];
@@ -14,6 +18,10 @@ document.addEventListener("DOMContentLoaded", randomPoster);
 
 randomButton.addEventListener("click", randomPoster);
 
+createPosterButton.addEventListener("click", showPosterForm);
+
+showMainButton.addEventListener("click", showMainPage)
+
 // functions and event handlers go here 👇
 function randomPoster() {
   currentPoster = new Poster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)])
@@ -22,13 +30,39 @@ function randomPoster() {
   quote.innerText = currentPoster.quote;
 };
 
+function showPosterForm() {
+  hide(pageLoadPoster);
+  show(createPosterForm);
+}
+
+function showMainPage() {
+  hide(createPosterForm);
+  show(pageLoadPoster);
+}
+
+function show(element) {
+  element.classList.remove('hidden');
+}
+
+function hide(element) {
+  element.classList.add('hidden');
+}
+
 // (we've provided one for you to get you started)!
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
+// Pseudocoding //
+
+// When a user clicks the “View Saved Posters” button, we should see the saved posters area, and the main poster should be hidden
+  // Assign a variable and querySelector to the "View Saved Posters" button.
+  // Assign a variable and querySelector to the VSP element.
+  // Add an eventListener to our VSP button.
+  // Create a function for eventListener.
+  // Hide main poster section.
+  // Show VSP section.
 
 // Array variables //
-
 var images = [
   "./assets/bees.jpg",
   "./assets/bridge.jpg",
