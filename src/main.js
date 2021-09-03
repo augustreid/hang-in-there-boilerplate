@@ -7,6 +7,9 @@ var createPosterButton = document.querySelector(".show-form");
 var createPosterForm = document.querySelector(".poster-form");
 var pageLoadPoster = document.querySelector(".main-poster");
 var showMainButton = document.querySelector(".show-main");
+var showSavedPoster = document.querySelector(".show-saved");
+var savedSection = document.querySelector(".saved-posters");
+var backToMain = document.querySelector(".back-to-main");
 
 // we've provided you with some data to work with 👇
 var savedPosters = [];
@@ -20,7 +23,11 @@ randomButton.addEventListener("click", randomPoster);
 
 createPosterButton.addEventListener("click", showPosterForm);
 
-showMainButton.addEventListener("click", showMainPage)
+showMainButton.addEventListener("click", showMainPage);
+
+showSavedPoster.addEventListener("click", goToSavedPosters);
+
+backToMain.addEventListener("click", showMainPage);
 
 // functions and event handlers go here 👇
 function randomPoster() {
@@ -38,6 +45,11 @@ function showPosterForm() {
 function showMainPage() {
   hide(createPosterForm);
   show(pageLoadPoster);
+}
+
+function goToSavedPosters() {
+  hide(pageLoadPoster);
+  show(savedSection);
 }
 
 function show(element) {
