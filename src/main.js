@@ -15,6 +15,8 @@ var posterTitle = document.querySelector("#poster-title");
 var posterQuote = document.querySelector("#poster-quote");
 var makePosterButton = document.querySelector(".make-poster");
 var savePosterButton = document.querySelector(".save-poster");
+var showSavedButton = document.querySelector(".show-saved");
+var savedPostersGrid = document.querySelector(".saved-posters-grid");
 // we've provided you with some data to work with 👇
 var savedPosters = [];
 var currentPoster;
@@ -36,6 +38,9 @@ backToMain.addEventListener("click", showMainPage);
 makePosterButton.addEventListener("click", showUserPoster);
 
 savePosterButton.addEventListener("click", saveThisPoster);
+
+showSavedButton.addEventListener("click", goToSavedPosters);
+
 // functions and event handlers go here 👇
 function randomPoster() {
   currentPoster = new Poster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)])
@@ -57,6 +62,18 @@ function showMainPage() {
 function goToSavedPosters() {
   hide(pageLoadPoster);
   show(savedSection);
+
+  savedPostersGrid.innerHTML = "";
+  for (var i = 0; i < savedPosters.length; i++) {
+    var posterID = document.querySelector(`#${savedPosters[i].id}`);
+    savedPostersGrid.innerHTML += `
+    <section id="${savedPosters[i].id}"
+      <img class="poster-img" src="${savedPosters[i].imageURL}" alt="nothin' to see here">
+      <h1 class="poster-title">${savedPosters[i].title}</h1>
+      <h3 class="poster-quote">${savedPosters[i].quote}</h3>
+    </section>`;
+    posterID.classList.add("mini-poster");
+  }
 }
 
 function showUserPoster() {
@@ -82,6 +99,7 @@ function saveThisPoster() {
     window.alert("It's already saved!");
   }
 }
+
 
 function show(element) {
   element.classList.remove('hidden');
