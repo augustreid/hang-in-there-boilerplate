@@ -14,6 +14,7 @@ var imageURL = document.querySelector("#poster-image-url");
 var posterTitle = document.querySelector("#poster-title");
 var posterQuote = document.querySelector("#poster-quote");
 var makePosterButton = document.querySelector(".make-poster");
+var savePosterButton = document.querySelector(".save-poster");
 // we've provided you with some data to work with 👇
 var savedPosters = [];
 var currentPoster;
@@ -33,6 +34,8 @@ showSavedPoster.addEventListener("click", goToSavedPosters);
 backToMain.addEventListener("click", showMainPage);
 
 makePosterButton.addEventListener("click", showUserPoster);
+
+savePosterButton.addEventListener("click", saveThisPoster);
 // functions and event handlers go here 👇
 function randomPoster() {
   currentPoster = new Poster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)])
@@ -70,6 +73,14 @@ function showUserPoster() {
   quote.innerText = currentPoster.quote;
 
   showMainPage();
+}
+
+function saveThisPoster() {
+  if (!savedPosters.includes(currentPoster)) {
+    savedPosters.push(currentPoster);
+  } else {
+    window.alert("It's already saved!");
+  }
 }
 
 function show(element) {
