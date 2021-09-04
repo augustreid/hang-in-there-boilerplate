@@ -69,10 +69,10 @@ function goToSavedPosters() {
   savedPostersGrid.innerHTML = "";
   for (var i = 0; i < savedPosters.length; i++) {
     savedPostersGrid.innerHTML += `
-      <div class="mini-poster" id="userPoster">
-        <img class="${savedPosters[i].id}" src=${savedPosters[i].imageURL}>
-        <h2 class="${savedPosters[i].id}"> ${savedPosters[i].title}</h2>
-        <h4 class="${savedPosters[i].id}"> ${savedPosters[i].quote}</h4>
+      <div class="mini-poster" id="${savedPosters[i].id}">
+        <img src=${savedPosters[i].imageURL}>
+        <h2> ${savedPosters[i].title}</h2>
+        <h4> ${savedPosters[i].quote}</h4>
       </div>`;
   }
 }
@@ -102,11 +102,13 @@ function saveThisPoster() {
 }
 
 function deleteUserPoster() {
+  console.log(typeof event.target.parentNode.id);
   for (var i = 0; i < savedPosters.length; i++) {
-    if (savedPosters[i].id === //Id of element clicked//) {
+    if (savedPosters[i].id === Number(event.target.parentNode.id)) {
       savedPosters.splice(i, 1);
     }
   }
+  goToSavedPosters();
 }
 
 function show(element) {
