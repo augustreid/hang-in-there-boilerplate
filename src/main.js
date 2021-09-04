@@ -41,6 +41,8 @@ savePosterButton.addEventListener("click", saveThisPoster);
 
 showSavedButton.addEventListener("click", goToSavedPosters);
 
+savedPostersGrid.addEventListener("dblclick", deleteUserPoster);
+
 // functions and event handlers go here 👇
 function randomPoster() {
   currentPoster = new Poster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)])
@@ -67,10 +69,10 @@ function goToSavedPosters() {
   savedPostersGrid.innerHTML = "";
   for (var i = 0; i < savedPosters.length; i++) {
     savedPostersGrid.innerHTML += `
-      <div class="mini-poster">
-        <img src=${savedPosters[i].imageURL}>
-        <h2>${savedPosters[i].title}</h2>
-        <h4>${savedPosters[i].quote}</h4>
+      <div class="mini-poster" id="userPoster">
+        <img class="${savedPosters[i].id}" src=${savedPosters[i].imageURL}>
+        <h2 class="${savedPosters[i].id}"> ${savedPosters[i].title}</h2>
+        <h4 class="${savedPosters[i].id}"> ${savedPosters[i].quote}</h4>
       </div>`;
   }
 }
@@ -96,6 +98,14 @@ function saveThisPoster() {
     savedPosters.push(currentPoster);
   } else {
     window.alert("It's already saved!");
+  }
+}
+
+function deleteUserPoster() {
+  for (var i = 0; i < savedPosters.length; i++) {
+    if (savedPosters[i].id === //Id of element clicked//) {
+      savedPosters.splice(i, 1);
+    }
   }
 }
 
