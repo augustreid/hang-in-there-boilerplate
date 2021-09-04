@@ -9,7 +9,7 @@ var pageLoadPoster = document.querySelector(".main-poster");
 var showMainButton = document.querySelector(".show-main");
 var showSavedPoster = document.querySelector(".show-saved");
 var savedSection = document.querySelector(".saved-posters");
-var backToMain = document.querySelector(".back-to-main");
+var backToMainButton = document.querySelector(".back-to-main");
 var imageURL = document.querySelector("#poster-image-url");
 var posterTitle = document.querySelector("#poster-title");
 var posterQuote = document.querySelector("#poster-quote");
@@ -17,10 +17,10 @@ var makePosterButton = document.querySelector(".make-poster");
 var savePosterButton = document.querySelector(".save-poster");
 var showSavedButton = document.querySelector(".show-saved");
 var savedPostersGrid = document.querySelector(".saved-posters-grid");
+
 // we've provided you with some data to work with 👇
 var savedPosters = [];
 var currentPoster;
-
 
 // event listeners go here 👇
 document.addEventListener("DOMContentLoaded", randomPoster);
@@ -33,7 +33,7 @@ showMainButton.addEventListener("click", showMainPage);
 
 showSavedPoster.addEventListener("click", goToSavedPosters);
 
-backToMain.addEventListener("click", showMainPage);
+backToMainButton.addEventListener("click", showMainPage);
 
 makePosterButton.addEventListener("click", showUserPoster);
 
@@ -57,6 +57,7 @@ function showPosterForm() {
 function showMainPage() {
   hide(createPosterForm);
   show(pageLoadPoster);
+  hide(savedSection);
 }
 
 function goToSavedPosters() {
@@ -65,14 +66,12 @@ function goToSavedPosters() {
 
   savedPostersGrid.innerHTML = "";
   for (var i = 0; i < savedPosters.length; i++) {
-    var posterID = document.querySelector(`#${savedPosters[i].id}`);
     savedPostersGrid.innerHTML += `
-    <section id="${savedPosters[i].id}"
-      <img class="poster-img" src="${savedPosters[i].imageURL}" alt="nothin' to see here">
-      <h1 class="poster-title">${savedPosters[i].title}</h1>
-      <h3 class="poster-quote">${savedPosters[i].quote}</h3>
-    </section>`;
-    posterID.classList.add("mini-poster");
+      <div class="mini-poster">
+        <img src=${savedPosters[i].imageURL}>
+        <h2>${savedPosters[i].title}</h2>
+        <h4>${savedPosters[i].quote}</h4>
+      </div>`;
   }
 }
 
@@ -100,7 +99,6 @@ function saveThisPoster() {
   }
 }
 
-
 function show(element) {
   element.classList.remove('hidden');
 }
@@ -113,7 +111,6 @@ function hide(element) {
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
-
 
 // Array variables //
 var images = [
