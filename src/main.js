@@ -2,21 +2,20 @@
 var mainPosterImage = document.querySelector(".poster-img");
 var mainPosterQuote = document.querySelector(".poster-quote");
 var mainPosterTitle = document.querySelector(".poster-title");
+var mainPoster = document.querySelector(".main-poster");
 var randomButton = document.querySelector(".show-random");
 var createPosterButton = document.querySelector(".show-form");
-var createPosterForm = document.querySelector(".poster-form");
-var pageLoadPoster = document.querySelector(".main-poster");
 var showMainButton = document.querySelector(".show-main");
-var showSavedPoster = document.querySelector(".show-saved");
-var savedSection = document.querySelector(".saved-posters");
 var backToMainButton = document.querySelector(".back-to-main");
-var imageURL = document.querySelector("#poster-image-url");
-var posterTitle = document.querySelector("#poster-title");
-var posterQuote = document.querySelector("#poster-quote");
 var makePosterButton = document.querySelector(".make-poster");
 var savePosterButton = document.querySelector(".save-poster");
 var showSavedButton = document.querySelector(".show-saved");
+var savedSection = document.querySelector(".saved-posters");
 var savedPostersGrid = document.querySelector(".saved-posters-grid");
+var createPosterForm = document.querySelector(".poster-form");
+var userImageURL = document.querySelector("#poster-image-url");
+var userPosterTitle = document.querySelector("#poster-title");
+var userPosterQuote = document.querySelector("#poster-quote");
 
 // we've provided you with some data to work with 👇
 var savedPosters = [];
@@ -31,7 +30,7 @@ createPosterButton.addEventListener("click", showPosterForm);
 
 showMainButton.addEventListener("click", showMainPage);
 
-showSavedPoster.addEventListener("click", goToSavedPosters);
+showSavedButton.addEventListener("click", goToSavedPosters);
 
 backToMainButton.addEventListener("click", showMainPage);
 
@@ -39,9 +38,8 @@ makePosterButton.addEventListener("click", showUserPoster);
 
 savePosterButton.addEventListener("click", saveThisPoster);
 
-showSavedButton.addEventListener("click", goToSavedPosters);
+savedPostersGrid.addEventListener("dblclick", deleteSavedPoster);
 
-savedPostersGrid.addEventListener("dblclick", deleteUserPoster);
 
 // functions and event handlers go here 👇
 function randomPoster() {
@@ -51,19 +49,19 @@ function randomPoster() {
   mainPosterQuote.innerText = currentPoster.quote;
 };
 
-function showPosterForm() {
-  hide(pageLoadPoster);
-  show(createPosterForm);
-};
-
 function showMainPage() {
   hide(createPosterForm);
-  show(pageLoadPoster);
+  show(mainPoster);
   hide(savedSection);
 };
 
+function showPosterForm() {
+  hide(mainPoster);
+  show(createPosterForm);
+};
+
 function goToSavedPosters() {
-  hide(pageLoadPoster);
+  hide(mainPoster);
   show(savedSection);
 
   savedPostersGrid.innerHTML = "";
@@ -77,14 +75,15 @@ function goToSavedPosters() {
   };
 };
 
+
 function showUserPoster() {
   event.preventDefault();
 
-  currentPoster = new Poster(imageURL.value, posterTitle.value, posterQuote.value);
+  currentPoster = new Poster(userImageURL.value, userPosterTitle.value, userPosterQuote.value);
 
-  images.push(imageURL.value);
-  titles.push(posterTitle.value);
-  quotes.push(posterQuote.value);
+  images.push(userImageURL.value);
+  titles.push(userPosterTitle.value);
+  quotes.push(userPosterQuote.value);
 
   mainPosterImage.src = currentPoster.imageURL;
   mainPosterTitle.innerText = currentPoster.title;
@@ -92,6 +91,7 @@ function showUserPoster() {
 
   showMainPage();
 };
+
 
 function saveThisPoster() {
   if (!savedPosters.includes(currentPoster)) {
@@ -101,8 +101,8 @@ function saveThisPoster() {
   };
 };
 
-function deleteUserPoster() {
-  console.log(typeof event.target.parentNode.id);
+
+function deleteSavedPoster() {
   for (var i = 0; i < savedPosters.length; i++) {
     if (savedPosters[i].id === Number(event.target.parentNode.id)) {
       savedPosters.splice(i, 1);
@@ -110,6 +110,8 @@ function deleteUserPoster() {
   };
   goToSavedPosters();
 };
+
+
 
 function show(element) {
   element.classList.remove('hidden');
