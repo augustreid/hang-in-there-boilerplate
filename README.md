@@ -36,7 +36,7 @@ event listeners.
 
 ## User Instructions
 
-**To access the deployed project** [CLICK HERE](file:///Users/augustreid/turing/mod1/pairedProjectHangInThere/index.html)
+**To access the deployed project** [CLICK HERE](https://augustreid.github.io/pairedProjectHangInThere/)
 
 The main page shows a randomly generated motivational poster. You can change the
 displayed poster by **clicking** the `Show Another Random poster` button.
